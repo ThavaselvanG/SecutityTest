@@ -13,14 +13,14 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.time.Instant;
 import java.util.*;
 import java.util.function.Function;
 
-@Component
+@Service
 public class JwtService {
 
 
@@ -58,7 +58,7 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    public Boolean createRefreshToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
@@ -85,26 +85,40 @@ public class JwtService {
 
     public JwtResponse getTokenResponse(RefreshToken refreshToken) {
         return JwtResponse.builder()
-                .tokenId(refreshToken.getToken())
+                .sessionId(refreshToken.getSessionId())
                 .accessToken(generateToken(refreshToken.getUserInfo().getUserName()))
                 .build();
 
     }
 
-    public RefreshToken createRefreshToken(String userName) {
+    public RefreshToken createToken(String userName) {
         UserInfo info = accountRepo.findByUserName(userName).orElseThrow(() -> new ResourceNotFound("User Not Found"));
         Optional<RefreshToken> refreshToken = refreshTokenRepo.findByUserInfoUserId(info.getUserId());
+        //check device count
         if (refreshToken.isPresent()) {
             refreshToken.get().setExpiryDate(Instant.now().plusMillis(600000));
-            refreshToken.get().setToken(UUID.randomUUID().toString());
             return refreshTokenRepo.save(refreshToken.get());
         } else {
             RefreshToken refreshToken1 = RefreshToken.builder()
                     .userInfo(info)
-                    .token(UUID.randomUUID().toString())
+                    .sessionId(UUID.randomUUID().toString())
                     .expiryDate(Instant.now().plusMillis(600000))//10
                     .build();
             return refreshTokenRepo.save(refreshToken1);
         }
+    }
+
+    public RefreshToken createRefreshToken(String sessionId) {
+        return refreshTokenRepo.findByToken(sessionId)
+                .map(this::verifyExpiration)
+                .orElseThrow(() -> new ResourceNotFound("Refresh token is not available in database"));
+    }
+
+    public RefreshToken verifyExpiration(RefreshToken token) {
+        if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
+            refreshTokenRepo.delete(token);
+            throw new RuntimeException(token.getSessionId() + " Refresh token was expired. Please make a new signin request");
+        }
+        return token;
     }
 }

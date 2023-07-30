@@ -2,6 +2,7 @@ package com.demo.app.demo.apis.accounts;
 
 import com.demo.app.demo.exceptionhandler.ResourceNotFound;
 import com.demo.app.demo.jwt.JwtService;
+import com.demo.app.demo.model.JwtResponse;
 import com.demo.app.demo.model.RefreshToken;
 import com.demo.app.demo.model.userlogin.UserLogin;
 import com.demo.app.demo.utils.responsehandler.ApiResponse;
@@ -42,7 +43,7 @@ public class AccountServiceImpl implements AccountService {
         UserInfo info = accountRepo.save(userInfo);
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(userInfo.getUserName(), password));
-        RefreshToken response = jwtService.createRefreshToken(info.getUserName());
+        RefreshToken response = jwtService.createToken(info.getUserName());
         return responseHandler.successResponse(jwtService.getTokenResponse(response));
     }
 
@@ -53,8 +54,14 @@ public class AccountServiceImpl implements AccountService {
         }
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(userLogin.getUserName(), userLogin.getPassWord()));
-        RefreshToken response = jwtService.createRefreshToken(userLogin.getUserName());
+        RefreshToken response = jwtService.createToken(userLogin.getUserName());
         return responseHandler.successResponse(jwtService.getTokenResponse(response));
+    }
+
+    @Override
+    public ResponseEntity<ApiResponse> refreshToken(JwtResponse jwtResponse) {
+        RefreshToken refreshToken = jwtService.createRefreshToken(jwtResponse.getSessionId());
+        return responseHandler.successResponse(jwtService.getTokenResponse(refreshToken));
     }
 
 

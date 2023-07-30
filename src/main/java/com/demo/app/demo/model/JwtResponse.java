@@ -7,5 +7,5 @@ import lombok.Data;
 @Builder
 public class JwtResponse {
     private String accessToken;
-    private String tokenId;
+    private String sessionId;
 }
