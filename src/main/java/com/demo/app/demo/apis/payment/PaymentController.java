@@ -10,7 +10,7 @@ public class PaymentController {
 
 
     @GetMapping("/test")
-    public String laogin() {
+    public String laogin(String s) {
         return "I can User";
     }
 }

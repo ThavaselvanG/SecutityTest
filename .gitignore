@@ -34,3 +34,4 @@ build/
 mvnw.cmd
 .mvn/wrapper
 src/main/resources/application.properties
+git rm --cached src/main/resources/application.properties
