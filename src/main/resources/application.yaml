@@ -1,0 +1,42 @@
+spring:
+  security:
+  profiles:
+    active:
+      - default
+  datasource:
+    url: jdbc:mysql://localhost/testdb
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8082
+
+
+key:
+  appname:
+    springboot
+  appscret:
+    namthan
+  baseUrl:
+    www.pichumani.com
+
+
+
+#
+##PostgreSQL
+#
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    username: postgres
+#    password: 1234
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create
+#
