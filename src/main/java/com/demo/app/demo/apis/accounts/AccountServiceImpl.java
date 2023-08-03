@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +62,11 @@ public class AccountServiceImpl implements AccountService {
     public ResponseEntity<ApiResponse> refreshToken(JwtResponse jwtResponse) {
         RefreshToken refreshToken = jwtService.createRefreshToken(jwtResponse.getSessionId());
         return responseHandler.successResponse(jwtService.getTokenResponse(refreshToken));
+    }
+
+    @Override
+    public ResponseEntity<ApiResponse> getAll() {
+        return responseHandler.successResponse(accountRepo.findAll());
     }
 
 

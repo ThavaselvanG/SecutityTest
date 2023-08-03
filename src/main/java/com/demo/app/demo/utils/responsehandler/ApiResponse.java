@@ -9,8 +9,11 @@ import java.util.List;
 @Data
 @Builder
 public class ApiResponse {
-    private boolean status;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String message;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     private int code;
+
 }

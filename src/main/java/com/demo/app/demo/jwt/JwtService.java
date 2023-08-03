@@ -85,7 +85,7 @@ public class JwtService {
 
     public JwtResponse getTokenResponse(RefreshToken refreshToken) {
         return JwtResponse.builder()
-                .sessionId(refreshToken.getSessionId())
+                .sessionId(refreshToken.getSessionsId())
                 .accessToken(generateToken(refreshToken.getUserInfo().getUserName()))
                 .build();
 
@@ -101,7 +101,7 @@ public class JwtService {
         } else {
             RefreshToken refreshToken1 = RefreshToken.builder()
                     .userInfo(info)
-                    .sessionId(UUID.randomUUID().toString())
+                    .sessionsId(UUID.randomUUID().toString())
                     .expiryDate(Instant.now().plusMillis(600000))//10
                     .build();
             return refreshTokenRepo.save(refreshToken1);
@@ -109,7 +109,7 @@ public class JwtService {
     }
 
     public RefreshToken createRefreshToken(String sessionId) {
-        return refreshTokenRepo.findByToken(sessionId)
+        return refreshTokenRepo.findByTokenId(sessionId)
                 .map(this::verifyExpiration)
                 .orElseThrow(() -> new ResourceNotFound("Refresh token is not available in database"));
     }
@@ -117,7 +117,7 @@ public class JwtService {
     public RefreshToken verifyExpiration(RefreshToken token) {
         if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
             refreshTokenRepo.delete(token);
-            throw new RuntimeException(token.getSessionId() + " Refresh token was expired. Please make a new signin request");
+            throw new RuntimeException(token.getSessionsId() + " Refresh token was expired. Please make a new signin request");
         }
         return token;
     }

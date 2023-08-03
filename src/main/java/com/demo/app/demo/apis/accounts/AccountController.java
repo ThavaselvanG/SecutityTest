@@ -6,10 +6,7 @@ import com.demo.app.demo.utils.responsehandler.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -34,4 +31,10 @@ public class AccountController {
     public ResponseEntity<ApiResponse> refreshToken(@Valid @RequestBody JwtResponse jwtResponse) {
         return accountService.refreshToken(jwtResponse);
     }
+    @GetMapping("/getUser")
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ApiResponse> getUser( ) {
+        return accountService.getAll();
+    }
+
 }

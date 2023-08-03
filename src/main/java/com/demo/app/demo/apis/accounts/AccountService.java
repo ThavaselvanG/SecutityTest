@@ -11,4 +11,6 @@ public interface AccountService {
     ResponseEntity<ApiResponse> userLogin(UserLogin userLogin);
 
     ResponseEntity<ApiResponse> refreshToken(JwtResponse jwtResponse);
+
+    ResponseEntity<ApiResponse> getAll();
 }
