@@ -31,10 +31,6 @@ public class AccountController {
     public ResponseEntity<ApiResponse> refreshToken(@Valid @RequestBody JwtResponse jwtResponse) {
         return accountService.refreshToken(jwtResponse);
     }
-    @GetMapping("/getUser")
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ApiResponse> getUser( ) {
-        return accountService.getAll();
-    }
+
 
 }

@@ -2,14 +2,10 @@ package com.demo.app.demo.apis.accounts;
 
 import com.demo.app.demo.customannotation.ValidPassword;
 import jakarta.persistence.*;
-import jakarta.validation.ReportAsSingleViolation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
@@ -40,5 +36,8 @@ public class UserInfo {
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private List<@Valid Address> addressList;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private AccountInfo info;
 
 }

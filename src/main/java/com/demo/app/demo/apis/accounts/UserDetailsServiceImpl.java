@@ -1,4 +1,4 @@
-package com.demo.app.demo.jwt;
+package com.demo.app.demo.apis.accounts;
 
 import com.demo.app.demo.apis.accounts.AccountRepo;
 import com.demo.app.demo.apis.accounts.Roles;
