@@ -26,7 +26,10 @@ public class AccountController {
         return accountService.userLogin(userLogin);
     }
 
-
+  @PostMapping("/")
+    public ResponseEntity<ApiResponse> userLsogin(@Valid @RequestBody UserLogin userLogin) {
+        return accountService.userLogin(userLogin);
+    }
     @PostMapping("/refreshToken")
     public ResponseEntity<ApiResponse> refreshToken(@Valid @RequestBody JwtResponse jwtResponse) {
         return accountService.refreshToken(jwtResponse);
