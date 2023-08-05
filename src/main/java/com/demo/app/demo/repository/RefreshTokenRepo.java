@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface RefreshTokenRepo extends JpaRepository<RefreshToken, Long> {
     //@EntityGraph(value = "UserInfo.userInfo", type = EntityGraph.EntityGraphType.FETCH)
     Optional<RefreshToken> findByUserInfoUserId(long id);
-    Optional<RefreshToken> findByToken(String token);
+    Optional<RefreshToken> findByTokenId(String token);
 }

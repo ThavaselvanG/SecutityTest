@@ -1,9 +1,9 @@
 package com.demo.app.demo.configuration;
 
-import com.demo.app.demo.exceptionhandler.AuthExceptionHandler;
+ import com.demo.app.demo.exceptionhandler.AuthExceptionHandler;
 import com.demo.app.demo.jwt.JwtAuthFilter;
-import com.demo.app.demo.jwt.UserDetailsServiceImpl;
-import com.demo.app.demo.test.ApiLive;
+ import com.demo.app.demo.apis.accounts.UserDetailsServiceImpl;
+ import com.demo.app.demo.test.ApiLive;
 import com.demo.app.demo.test.ApiTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,16 +1,15 @@
 package com.demo.app.demo.apis.payment;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.demo.app.demo.apis.accounts.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/api/payment")
+@RequestMapping("/v1/api/admin")
 public class PaymentController {
 
 
-    @GetMapping("/test")
-    public String laogin(String s) {
-        return "I can User";
-    }
+
+
 }

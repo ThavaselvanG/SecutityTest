@@ -30,12 +30,12 @@ public class GlobalException {
         return responseHandler.unauthorized(exception.getMessage());
     }
     @ExceptionHandler({AccessDeniedException.class})
-    public ResponseEntity<ApiResponse> authHandler(AccessDeniedException exception) {
+    public ResponseEntity<ApiResponse> accessDenied(AccessDeniedException exception) {
         return responseHandler.unauthorized(exception.getMessage());
     }
 
     @ExceptionHandler({UsernameNotFoundException.class})
-    public ResponseEntity<ApiResponse> authHandler(UsernameNotFoundException exception) {
+    public ResponseEntity<ApiResponse> resourceNotFound(UsernameNotFoundException exception) {
         return responseHandler.notFound(exception.getMessage());
     }
 
@@ -49,8 +49,12 @@ public class GlobalException {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ApiResponse> dataBaseIssue(NullPointerException exception) {
-        return responseHandler.customResponse(HttpStatus.BAD_REQUEST, false, exception.getMessage(), null);
+    public ResponseEntity<ApiResponse> nullPointerException(NullPointerException exception) {
+        return responseHandler.customErrorResponse(HttpStatus.BAD_REQUEST, exception.getMessage());
+    }
+    @ExceptionHandler
+    public ResponseEntity<ApiResponse> indexOutOfBoundsException(IndexOutOfBoundsException exception) {
+        return responseHandler.customErrorResponse(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
     @ExceptionHandler
@@ -73,7 +77,7 @@ public class GlobalException {
 
     @ExceptionHandler
     public ResponseEntity<ApiResponse> resourceNotFound(ResourceNotFound exception) {
-        return responseHandler.customResponse(HttpStatus.BAD_REQUEST, false, exception.getMessage(), null);
+        return responseHandler.customErrorResponse(HttpStatus.BAD_REQUEST   , exception.getMessage());
     }
 
 
