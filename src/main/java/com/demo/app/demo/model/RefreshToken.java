@@ -19,7 +19,7 @@ public class RefreshToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long tokenId;
-    private String sessionId;
+    private String sessionsId;
     private Instant expiryDate;
 
     @OneToOne(cascade = CascadeType.ALL)
