@@ -8,7 +8,7 @@ class AccountControllerTest {
 
     @Test
     private void he(){
-        assertEquals(0,0);
+        assertEquals(1,0);
     }
 
 }
