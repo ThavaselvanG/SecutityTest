@@ -11,4 +11,8 @@ class AccountControllerTest {
         assertEquals(1,0);
     }
 
+    @Test
+    private void hea(){
+        assertEquals(0,0);
+    }
 }
