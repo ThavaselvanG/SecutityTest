@@ -7,7 +7,7 @@ on:
   pull_request:
       types: [opened, synchronize, reopened]
 
-name: SonarQube Scan
+name: SonarQube running
 jobs:
   sonarqube:
     name: SonarQube Trigger
@@ -18,8 +18,8 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
-    - name: SonarQube Scan
+    - name: SonarQube running
       uses: kitabisa/sonarqube-action@v1.2.0
       with:
-        host: http://192.168.221.45:9000/
+        host: http://localhost:9000/
         login: sqa_3e1257e96eb340455a84d8da7fd8cbe6df49b558
