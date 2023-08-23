@@ -14,6 +14,8 @@ class DemoApplicationTests {
 
         assertEquals(0, 0);
           assertEquals(0, 1);
+                  assertEquals(0, 2);
+
     }
 
 
