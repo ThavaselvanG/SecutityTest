@@ -21,5 +21,5 @@ jobs:
     - name: SonarQube running
       uses: kitabisa/sonarqube-action@v1.2.0
       with:
-        host: http://localhost:9000/
+        host: http://127.0.0.1:9000/
         login: sqa_3e1257e96eb340455a84d8da7fd8cbe6df49b558
