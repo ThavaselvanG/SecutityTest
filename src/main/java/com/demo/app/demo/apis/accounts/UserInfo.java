@@ -36,8 +36,5 @@ public class UserInfo {
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private List<@Valid Address> addressList;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
-    private AccountInfo info;
 
 }

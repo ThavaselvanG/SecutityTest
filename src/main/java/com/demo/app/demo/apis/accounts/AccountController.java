@@ -20,14 +20,13 @@ public class AccountController {
         return accountService.createUser(userInfo);
     }
 
-
-    @PostMapping("/")
+   /* @PostMapping("/")
     public ResponseEntity<ApiResponse> userLogin(@Valid @RequestBody UserLogin userLogin) {
         return accountService.userLogin(userLogin);
-    }
+    }*/
 
-  @PostMapping("/")
-    public ResponseEntity<ApiResponse> userLsogin(@Valid @RequestBody UserLogin userLogin) {
+    @GetMapping("/")
+    public ResponseEntity<ApiResponse> userLogin(@Valid @RequestBody UserLogin userLogin) {
         return accountService.userLogin(userLogin);
     }
     @PostMapping("/refreshToken")

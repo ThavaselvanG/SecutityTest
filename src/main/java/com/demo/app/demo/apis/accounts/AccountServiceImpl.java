@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountServiceImpl implements AccountService {
     @Autowired
-    private AccountRepo accountRepo;
+    private UserRepo accountRepo;
     @Autowired
     @Qualifier("apiHandler")
     ResponseHandler responseHandler;
@@ -31,14 +31,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private JwtService jwtService;
-    private String password;
+
+    @Autowired AccountInfoRepo accountInfoRepo;
 
     @Override
     public ResponseEntity<ApiResponse> createUser(UserInfo userInfo) {
         if (accountRepo.findByUserName(userInfo.getUserName()).isPresent()) {
             throw new UsernameNotFoundException("Username already exits");
         }
-        password = userInfo.getPassword();
+        String password = userInfo.getPassword();
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
         UserInfo info = accountRepo.save(userInfo);
         authenticationManager
@@ -49,6 +50,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public ResponseEntity<ApiResponse> userLogin(UserLogin userLogin) {
+
+
+        AccountInfo info=new AccountInfo();
+        info.setAmount(100);
+        info.setMobileNumber("100");
+        info.setUserName("thavam");
+        accountInfoRepo.save(info);
         if (accountRepo.findByUserName(userLogin.getUserName()).isEmpty()) {
             throw new ResourceNotFound("Username not found");
         }

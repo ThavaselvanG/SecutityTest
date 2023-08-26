@@ -1,9 +1,11 @@
 package com.demo.app.demo.apis.accounts;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "account_info")
+@Data
 public class AccountInfo {
 
     @Id
@@ -13,4 +15,7 @@ public class AccountInfo {
     private String mobileNumber;
     private String userName;
 
+  //  @OneToMany(cascade = CascadeType.ALL)
+  //  @JoinColumn(name = "userId", referencedColumnName = "userId")
+  //  private UserInfo userInfo;
 }

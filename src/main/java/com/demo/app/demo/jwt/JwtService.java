@@ -1,6 +1,6 @@
 package com.demo.app.demo.jwt;
 
-import com.demo.app.demo.apis.accounts.AccountRepo;
+import com.demo.app.demo.apis.accounts.UserRepo;
 import com.demo.app.demo.apis.accounts.UserInfo;
 import com.demo.app.demo.exceptionhandler.ResourceNotFound;
 import com.demo.app.demo.model.JwtResponse;
@@ -27,7 +27,7 @@ public class JwtService {
     @Autowired
     private RefreshTokenRepo refreshTokenRepo;
     @Autowired
-    private AccountRepo accountRepo;
+    private UserRepo accountRepo;
 
     public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
