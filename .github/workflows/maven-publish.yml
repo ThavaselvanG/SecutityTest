@@ -22,4 +22,4 @@ jobs:
       uses: kitabisa/sonarqube-action@v1.2.0
       with:
         host: http://localhost:9000
-        login: sqa_3e1257e96eb340455a84d8da7fd8cbe6df49b558
+        login: squ_2b5ffabe0a92190f05ceffbb9b40043a694d2a80
