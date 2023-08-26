@@ -10,7 +10,7 @@ on:
 name: SonarQube running
 jobs:
   sonarqube:
-    name: SonarQube Trigger
+    name: SonarQube Test running
     runs-on: ubuntu-latest
     steps:
     - name: Checking out
